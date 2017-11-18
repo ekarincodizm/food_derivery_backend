@@ -1,0 +1,81 @@
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">รายละเอียดสินค้า</h4>
+      </div>
+      <div class="modal-body" style="padding: 0">
+
+          <div id="page-wrapper" style="margin: 0px; padding-top: 22px; padding-bottom: 12px">
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-md-4 col-xs-12">
+                          <div class="white-box">
+                              <div class="user-bg"> <img width="100%" alt="user" src="../plugins/images/large/img1.jpg">
+                                  <div class="overlay-box">
+                                      <div class="user-content">
+                                          <a href="javascript:void(0)"><img src="../plugins/images/users/genu.jpg" class="thumb-lg img-circle" alt="img"></a>
+                                          <h4 class="text-white">User Name</h4>
+                                          <h5 class="text-white">info@myadmin.com</h5> </div>
+                                  </div>
+                              </div>
+                              <div class="user-btm-box">
+                                  <div class="col-md-12 col-sm-12 text-right">
+                                      <p class="text-danger"><i class="ti-dribbble"></i></p>
+                                      <button class="btn btn-success">Choose picture profile</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-8 col-xs-12">
+                          <div class="white-box">
+                              <form ng-submit="create_user()" class="form-horizontal form-material">
+                                  <div class="form-group has-warning">
+                                      <label class="col-md-12">ชื่อ *</label>
+                                      <div class="col-md-12">
+                                          <input type="text" class="form-control form-control-line" ng-model="user.name"> </div>
+                                  </div>
+                                  <div class="form-group has-warning">
+                                      <label class="col-md-12">รายละเอียด</label>
+                                      <div class="col-md-12">
+                                          <textarea rows="5" class="form-control form-control-line" ng-model="user.current_address"></textarea>
+                                      </div>
+                                  </div>
+                                  <div class="form-group has-warning">
+                                      <label class="col-md-12">ประเภท *</label>
+                                      <div class="col-md-12">
+                                          <select class="form-control form-control-line" ng-required="required">
+                                              <option value="">อาหารสด</option>
+                                              <option value="">อาหารเเห้ง</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <div class="form-group has-warning">
+                                      <label class="col-md-12">จำนวน *</label>
+                                      <div class="col-md-12">
+                                          <input type="password" value="password" class="form-control form-control-line" ng-model="user.password" ng-required="required"> </div>
+                                  </div>
+                                  <div class="form-group has-warning">
+                                      <label class="col-md-12">ราคา (บาท) / หน่วย *</label>
+                                      <div class="col-md-12">
+                                          <input type="text" placeholder="" class="form-control form-control-line" ng-model="user.tel"> </div>
+                                  </div>
+                                  <div class="form-group has-warning">
+                                      <label class="col-sm-12">หน่วย *</label>
+                                      <div class="col-sm-12">
+                                          <input type="text" placeholder="กก." class="form-control form-control-line" ng-model="user.username">
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- /.row -->
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>

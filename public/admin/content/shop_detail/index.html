@@ -1,0 +1,364 @@
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Stocks</h4> </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <a data-toggle="modal" ng-click="updateShop()"
+                    class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light"
+                >
+                    <i class="fa fa-plus fa-fw" aria-hidden="true"></i><span class="hide-menu">Save</span>
+                </a>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Profile
+                                <div class="col-md-2 col-sm-4 col-xs-12 pull-right">
+
+                                </div>
+                            </h3>
+                            <div class="white-box">
+                                <div class="user-bg">
+                                    <img ng-show="detail.url_img_profile" width="100%" alt="user" src="{{ detail.url_img_profile }}">
+                                    <div ng-show="!detail.url_img_profile" class="overlay-box">
+                                        <div class="user-content">
+                                            <h4 class="text-white">Profile Image</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="user-btm-box">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">URL</label>
+                                        <input  ng-model="detail.url_img_profile" class="form-control" id="exampleFormControlInput1" placeholder="https:\\www.food-delivery/shop.jpg">
+                                    </div>
+                                </div>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">ชื่อร้านอาหาร</label>
+                                        <input  ng-model="detail.title" class="form-control" id="exampleFormControlInput1" placeholder="ร้านสุขใจ">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">รายละเอียด</label>
+                                        <textarea ng-model="detail.detail" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">ที่อยู่</label>
+                                        <textarea ng-model="detail.address" class="form-control" rows="2"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">พิกัดร้าน</label>
+                                        <input ng-model="detail.lat_lng" class="form-control" id="exampleFormControlInput1" placeholder="10.245848,100.58488">
+                                        <div style="text-align: right; margin-top: 10px">
+                                            <button type="submit" class="btn btn-primary">เลือกจากเเผนที่</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">Estimate cook time (นาที)</label>
+                                        <input type="number" ng-model="detail.estimate_cook_time" class="form-control"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">เบอร์โทร</label>
+                                        <input ng-model="detail.phone" class="form-control" id="exampleFormControlTextarea1"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">อีเมล์</label>
+                                        <input ng-model="detail.email" class="form-control" id="exampleFormControlTextarea1"></input>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="white-box">
+                        <h3 class="box-title">TYPE
+                            <div class="col-md-2 col-sm-4 col-xs-12 pull-right">
+
+                            </div>
+                        </h3>
+                        <div class="white-box">
+                            <div class="field is-grouped is-grouped-multiline" style="margin-bottom: 20px">
+                                <div class="control" ng-repeat="shop_menu_id in shop_menus">
+                                    <div class="tags has-addons">
+                                        <a class="tag is-link" style="font-size: 12px">{{ get_menu_name_from_id(shop_menu_id).name_th }}</a>
+                                        <a class="tag is-delete"
+                                            ng-click="remove_shop_type($index)"
+                                        ></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tags">
+                                <span
+                                    class="tag is-medium"
+                                    ng-repeat="menu in menus"
+                                    ng-click="add_menu(menu.id)"
+                                    ng-if="already_choosed(menu)"
+                                    style="font-size: 12px"
+                                >
+                                    {{ menu.name_th }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Cover Images
+                                <div class="col-md-2 col-sm-4 col-xs-12 pull-right">
+                                    <a data-toggle="modal" ng-click="headerImageDialogShow()"
+                                        class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light"
+                                    >
+                                        <i class="fa fa-plus fa-fw" aria-hidden="true"></i><span class="hide-menu">เเก้ไขรูป Cover</span>
+                                    </a>
+                                </div>
+                            </h3>
+                            <div>
+                                <img style="margin-right: 15px" src="{{ detail.header_image['0'] }}" class="img-thumbnail" alt="First Header Image" width="304" height="236">
+                                <img style="margin-right: 15px" src="{{ detail.header_image['1'] }}" class="img-thumbnail" alt="Second Header Image" width="304" height="236">
+                                <img style="margin-right: 15px" src="{{ detail.header_image['2'] }}" class="img-thumbnail" alt="Third Header Image" width="304" height="236">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">MENU TYPE
+                                <div class="col-md-2 col-sm-4 col-xs-12 pull-right">
+
+                                </div>
+                            </h3>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th  class="col-md-2">#</th>
+                                            <th>ชื่อ</th>
+                                            <th class="col-md-2" style="text-align: center">เเก้ไข / ลบ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="food_type in detail.food_type">
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>
+                                                {{ food_type.name }}
+                                            </td>
+                                            <td class="col-md-2" style="text-align: center">
+                                                <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="editCategory($index)">
+                                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="removeCategory($index)">
+                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input class="form-control" ng-model="new_food_type" placeholder="ชื่อหมวดหมู่">
+                                                </div>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <button type="button" class="btn btn-success" ng-click="addFoodType()">ADD</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">List products
+                                <div class="col-md-2 col-sm-4 col-xs-12 pull-right">
+                                </div>
+                            </h3>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>รูปตัวอย่าง</th>
+                                            <th>รายการสินค้า</th>
+                                            <th>ประเภท</th>
+                                            <th>ราคา (บาท)</th>
+                                            <th class="col-md-2" style="text-align: center">เเก้ไข / ลบ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="product in detail.product_list">
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>
+                                                <img src="{{ product.url_image }}" class="img-thumbnail" alt="Wrong URL" width="200px" height="200px"/>
+                                            </td>
+                                            <td>{{ product.name }}</td>
+                                            <td>{{ getCategoryNameByID(product.category) }}</td>
+                                            <td>{{ product.price }}</td>
+                                            <td class="col-md-2" style="text-align: center">
+                                                <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="showUpdateProductDialog($index)">
+                                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="removeFood($index)">
+                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input class="form-control" ng-model="new_food_url" placeholder="url รูปตัวอย่าง">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input class="form-control" ng-model="new_food_name" placeholder="ชื่อรายการอาหาร">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <select class="form-control" ng-model="new_food_category" ng-options="food_type.id as food_type.name for food_type in detail.food_type"></select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input class="form-control" ng-model="new_food_price" placeholder="ราคา">
+                                                </div>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <button type="button" class="btn btn-success" ng-click="addFood()">ADD</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- /.row -->
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+    <footer class="footer text-center"> 2017 &copy; Pixel Admin brought to you by wrappixel.com </footer>
+</div>
+
+
+<!-- header create  -->
+<div class="modal fade" id="headerImageDialog" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Header Images</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>รูปที่ 1</label>
+                        <input class="form-control" ng-model="header_image_1">
+                    </div>
+                    <div class="form-group">
+                        <labe>รูปที่ 2</label>
+                        <input class="form-control" ng-model="header_image_2">
+                    </div>
+                    <div class="form-group">
+                        <label>รูปที่ 3</label>
+                        <input class="form-control" ng-model="header_image_3">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" ng-click="saveHeaderImage()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- category update  -->
+<div class="modal fade" id="categoryDialog" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Category</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>ชื่อหมวดหมู่</label>
+                        <input class="form-control" ng-model="update_name_category">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" ng-click="updateCategoryName()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- product update  -->
+<div class="modal fade" id="productDialog" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Product</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>URL รูปตัวอย่าง</label>
+                        <input class="form-control" ng-model="update_food_url">
+                    </div>
+                    <div class="form-group">
+                        <labe>ชื่อรายการอาหาร</label>
+                        <input class="form-control" ng-model="update_food_name">
+                    </div>
+
+                    <!-- <div class="form-group">
+                        <label>หมวดหมู่</label>
+                        <input class="form-control" ng-model="update_food_category">
+                    </div>  -->
+                    <div class="form-group">
+                        <select class="form-control" ng-model="update_food_category" ng-options="food_type.id as food_type.name for food_type in detail.food_type"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>ราคา</label>
+                        <input class="form-control" ng-model="update_food_price">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" ng-click="updateProduct()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
